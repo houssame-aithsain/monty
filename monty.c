@@ -25,6 +25,12 @@ void push(stack_t **stack, unsigned int numb)
 	stack_t *tmp = *stack;
 	stack_t *node = malloc(sizeof(stack_t));
 
+	if (!node)
+	{
+		fprintf(stderr, MALLOCERR);
+		exit(EXIT_FAILURE);
+	}
+
 	node->n = numb;
 	while (tmp->next)
 		tmp = tmp->next;

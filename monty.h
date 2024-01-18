@@ -11,6 +11,7 @@
 #define FDERR "Error: Can't open file"
 #define PUSH "push"
 #define PALL "pall"
+#define MALLOCERR "Error: malloc failed"
 
 #define ARGV_NUMB 2
 #define BEGIN 0
