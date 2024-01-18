@@ -24,8 +24,11 @@ void pop(char **opcode, var_t *data)
 		data->stack = data->stack->next;
 	}
 	if (data->stack == tmp)
-		data->stack->n = BG;
-	while (data->stack->prev)
+	{
+		free(data->stack);
+		data->stack = NULL;
+	}
+	while (data->stack && data->stack->prev)
 		data->stack = data->stack->prev;
 }
 

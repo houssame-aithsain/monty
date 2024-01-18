@@ -11,6 +11,13 @@ void push(stack_t **stack, unsigned int numb)
 	stack_t *node = ft_malloc();
 
 	node->n = numb;
+	if (!*stack)
+	{
+		*stack = node;
+		node->next = NULL;
+		node->prev = NULL;
+		return;
+	}
 	while (tmp->next)
 		tmp = tmp->next;
 
