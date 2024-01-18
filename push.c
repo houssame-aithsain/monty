@@ -30,7 +30,7 @@ bool prePush(var_t *data, char **tmpOpcode)
 	if (tmpOpcode[BEGIN] && !ft_strcmp(tmpOpcode[BEGIN], PUSH))
 	{
 		if (!argChecker(tmpOpcode[NEXT]))
-			printError(tmpOpcode, data->line, data->ln, data->stack, PUSHERR);
+			printError(tmpOpcode, data, PUSHERR);
 		if (data->first)
 		{
 			data->stack->n = atoi(tmpOpcode[NEXT]);

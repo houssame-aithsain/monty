@@ -1,6 +1,22 @@
 #include "monty.h"
 
 /**
+ * pint - Prints the value at the top of the stack.
+ * @opcode: An array containing the opcode (not used in the function).
+ * @data: A pointer to the structure holding program data.
+ */
+void pint(char **opcode, var_t *data)
+{
+	stack_t *tmp = data->stack;
+
+	if (!tmp || tmp->n == BG)
+		printError(opcode, data, PINTERR);
+	while (tmp->next)
+		tmp = tmp->next;
+	printf("%d\n", tmp->n);
+}
+
+/**
  * pall - Print all elements of the stack.
  * @stack: Pointer to the top of the stack.
  */
@@ -41,7 +57,7 @@ int getFileDescriptorId(char *fileName)
 void saveFileInput(int fd)
 {
 	var_t data;
-	char **tmpOpcode;
+	char **opcode;
 
 	init(&data);
 	while (true)
@@ -49,16 +65,19 @@ void saveFileInput(int fd)
 		data.line = get_next_line(fd);
 		if (data.line)
 		{
-			tmpOpcode = ft_split(data.line, SPACE);
-			tmpOpcode[BEGIN] = newLineEraser(tmpOpcode[BEGIN]);
-			if (ft_strcmp(tmpOpcode[BEGIN], PUSH) && ft_strcmp(tmpOpcode[BEGIN], PALL))
-				printError(tmpOpcode, data.line, data.ln, data.stack, DEFAULTERR);
-			if (prePush(&data, tmpOpcode))
+			opcode = ft_split(data.line, SPACE);
+			opcode[BEGIN] = newLineEraser(opcode[BEGIN]);
+			if (ft_strcmp(opcode[BEGIN], PUSH) && ft_strcmp(opcode[BEGIN], PALL)
+				&& ft_strcmp(opcode[BEGIN], PINT))
+				printError(opcode, &data, DEFAULTERR);
+			if (prePush(&data, opcode))
 				continue;
-			if (tmpOpcode[BEGIN] && !ft_strcmp(tmpOpcode[BEGIN], PALL))
+			if (opcode[BEGIN] && !ft_strcmp(opcode[BEGIN], PALL))
 				pall(data.stack);
+			if (opcode[BEGIN] && !ft_strcmp(opcode[BEGIN], PINT))
+				pint(opcode, &data);
 			data.ln++;
-			ft_free(tmpOpcode, data.line);
+			ft_free(opcode, data.line);
 			continue;
 		}
 		break;

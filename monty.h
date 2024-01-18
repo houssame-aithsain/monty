@@ -11,7 +11,9 @@
 #define FDERR "Error: Can't open file"
 #define PUSH "push"
 #define PALL "pall"
+#define PINT "pint"
 #define MALLOCERR "Error: malloc failed\n"
+#define EMPTYLINE ": can't pint, stack empty\n"
 #define BG -8462315
 
 #define ARGV_NUMB 2
@@ -20,6 +22,7 @@
 #define SPACE 32
 #define PUSHERR 31
 #define PALLERR 32
+#define	PINTERR 34
 #define DEFAULTERR 0
 #define NEWLINE '\n'
 
@@ -86,13 +89,13 @@ char    **ft_split(char const *s, char c);
 char    *ft_strdup(char *s);
 int     ft_strcmp(const char *s1, const char *s2);
 void    ft_free(char **src, char *line);
-void    printError(char **opcode, char *line, int line_number,
-	stack_t *stack, int flag);
+void    printError(char **opcode, var_t *data, int flag);
 void	pall(stack_t *stack);
 char    *newLineEraser(char *src);
 void    stackFree(stack_t *stack);
 bool    argChecker(char *str);
 stack_t	*ft_malloc(void);
 void	init(var_t *data);
-bool prePush(var_t *data, char **tmpOpcode);
+bool	prePush(var_t *data, char **tmpOpcode);
+void	pint(char **opcode, var_t *data);
 #endif /*MONTY_H*/
