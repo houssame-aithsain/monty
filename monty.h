@@ -12,6 +12,7 @@
 #define PUSH "push"
 #define PALL "pall"
 #define MALLOCERR "Error: malloc failed\n"
+#define BG -8462315
 
 #define ARGV_NUMB 2
 #define BEGIN 0
@@ -59,6 +60,22 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+/**
+ * struct var_s - Structure representing variables.
+ *
+ * @line: A pointer to a string.
+ * @ln: An integer variable.
+ * @stack: A pointer to a stack structure.
+ * @first: A boolean indicating if it is the first occurrence.
+ */
+typedef struct var_s
+{
+	char *line;
+	int ln;
+	stack_t *stack;
+	bool first;
+} var_t;
+
 int     getFileDescriptorId(char *fileName);
 void    saveFileInput(int fd);
 size_t	ft_strlen(char *str);
@@ -71,9 +88,10 @@ int     ft_strcmp(const char *s1, const char *s2);
 void    ft_free(char **src, char *line);
 void    printError(char **opcode, char *line, int line_number,
 	stack_t *stack, int flag);
-void	pall(stack_t *stack, int line_number);
+void	pall(stack_t *stack);
 char    *newLineEraser(char *src);
 void    stackFree(stack_t *stack);
 bool    argChecker(char *str);
 stack_t	*ft_malloc(void);
+void	init(var_t *data);
 #endif /*MONTY_H*/

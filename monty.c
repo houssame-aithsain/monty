@@ -3,11 +3,10 @@
 /**
  * pall - Print all elements of the stack.
  * @stack: Pointer to the top of the stack.
- * @line_number: line_number
  */
-void pall(stack_t *stack, int line_number)
+void pall(stack_t *stack)
 {
-	if (!stack || line_number == NEXT)
+	if (!stack || stack->n == BG)
 		return;
 	while (stack->next)
 		stack = stack->next;
@@ -60,43 +59,40 @@ int getFileDescriptorId(char *fileName)
  */
 void saveFileInput(int fd)
 {
-	char *line;
+	var_t data;
 	char **tmpOpcode;
-	int line_number = NEXT;
-	stack_t *stack;
 
-	stack = ft_malloc();
-	stack->prev = NULL;
-	stack->next = NULL;
+	init(&data);
 	while (true)
 	{
-		line = get_next_line(fd);
-		if (line)
+		data.line = get_next_line(fd);
+		if (data.line)
 		{
-			tmpOpcode = ft_split(line, SPACE);
+			tmpOpcode = ft_split(data.line, SPACE);
 			tmpOpcode[BEGIN] = newLineEraser(tmpOpcode[BEGIN]);
 			if (ft_strcmp(tmpOpcode[BEGIN], PUSH) && ft_strcmp(tmpOpcode[BEGIN], PALL))
-				printError(tmpOpcode, line, line_number, stack, DEFAULTERR);
+				printError(tmpOpcode, data.line, data.ln, data.stack, DEFAULTERR);
 			if (tmpOpcode[BEGIN] && !ft_strcmp(tmpOpcode[BEGIN], PUSH))
 			{
 				if (!argChecker(tmpOpcode[NEXT]))
-					printError(tmpOpcode, line, line_number, stack, PUSHERR);
-				if (line_number == NEXT)
+					printError(tmpOpcode, data.line, data.ln, data.stack, PUSHERR);
+				if (data.first)
 				{
-					stack->n = atoi(tmpOpcode[NEXT]);
-					ft_free(tmpOpcode, line);
-					line_number++;
+					data.stack->n = atoi(tmpOpcode[NEXT]);
+					ft_free(tmpOpcode, data.line);
+					data.ln++;
+					data.first = false;
 					continue;
 				}
-				push(&stack, atoi(tmpOpcode[NEXT]));
+				push(&data.stack, atoi(tmpOpcode[NEXT]));
 			}
 			if (tmpOpcode[BEGIN] && !ft_strcmp(tmpOpcode[BEGIN], PALL))
-				pall(stack, line_number);
-			line_number++;
-			ft_free(tmpOpcode, line);
+				pall(data.stack);
+			data.ln++;
+			ft_free(tmpOpcode, data.line);
 			continue;
 		}
 		break;
 	}
-	stackFree(stack);
+	stackFree(data.stack);
 }

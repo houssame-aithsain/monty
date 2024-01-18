@@ -39,3 +39,17 @@ stack_t *ft_malloc(void)
 	}
 	return (stack);
 }
+
+/**
+ * init - Initializes a structure with default values.
+ * @data: A pointer to the structure to be initialized.
+ */
+void init(var_t *data)
+{
+	data->ln = NEXT;
+	data->first = true;
+	data->stack = ft_malloc();
+	data->stack->prev = NULL;
+	data->stack->next = NULL;
+	data->stack->n = BG;
+}
