@@ -36,12 +36,12 @@ void ft_free(char **src, char *line)
 /**
  * printError - Prints error messages based on opcode and line number.
  * @opc: The opcode causing the error.
- * @line_number: The line number where the error occurred.
+ * @line_n: The line number where the error occurred.
  * @flag: The type of error to be printed.
  * @line: line
  * @stack: stack
  */
-void printError(char **opc, char *line, int line_number,
+void printError(char **opc, char *line, int line_n,
 	stack_t *stack, int flag)
 {
 	if (!opc[BEGIN] || !opc[BEGIN][BEGIN])
@@ -50,10 +50,10 @@ void printError(char **opc, char *line, int line_number,
 	switch (flag)
 	{
 	case DEFAULTERR:
-		fprintf(stderr, "L<%d>: unknown instruction <%s>", line_number, opc[BEGIN]);
+		fprintf(stderr, "L<%d>: unknown instruction <%s>\n", line_n, opc[BEGIN]);
 		break;
 	case PUSHERR:
-		fprintf(stderr, "L<%d>: usage: push integer", line_number);
+		fprintf(stderr, "L<%d>: usage: push integer\n", line_n);
 	default:
 		break;
 	}
