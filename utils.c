@@ -50,10 +50,10 @@ void printError(char **opc, char *line, int line_n,
 	switch (flag)
 	{
 	case DEFAULTERR:
-		fprintf(stderr, "L<%d>: unknown instruction <%s>\n", line_n, opc[BEGIN]);
+		fprintf(stderr, "L%d: unknown instruction %s\n", line_n, opc[BEGIN]);
 		break;
 	case PUSHERR:
-		fprintf(stderr, "L<%d>: usage: push integer\n", line_n);
+		fprintf(stderr, "L%d: usage: push integer\n", line_n);
 	default:
 		break;
 	}
