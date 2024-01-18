@@ -18,25 +18,6 @@ void pall(stack_t *stack)
 }
 
 /**
- * push - Push a new element onto the stack.
- * @stack: Pointer to the top of the stack.
- * @numb: Number to be pushed onto the stack.
- */
-void push(stack_t **stack, unsigned int numb)
-{
-	stack_t *tmp = *stack;
-	stack_t *node = ft_malloc();
-
-	node->n = numb;
-	while (tmp->next)
-		tmp = tmp->next;
-
-	tmp->next = node;
-	node->prev = tmp;
-	node->next = NULL;
-}
-
-/**
  * getFileDescriptorId - Get the file descriptor ID for a file.
  * @fileName: Name of the file.
  * Return: File descriptor ID.
@@ -72,20 +53,8 @@ void saveFileInput(int fd)
 			tmpOpcode[BEGIN] = newLineEraser(tmpOpcode[BEGIN]);
 			if (ft_strcmp(tmpOpcode[BEGIN], PUSH) && ft_strcmp(tmpOpcode[BEGIN], PALL))
 				printError(tmpOpcode, data.line, data.ln, data.stack, DEFAULTERR);
-			if (tmpOpcode[BEGIN] && !ft_strcmp(tmpOpcode[BEGIN], PUSH))
-			{
-				if (!argChecker(tmpOpcode[NEXT]))
-					printError(tmpOpcode, data.line, data.ln, data.stack, PUSHERR);
-				if (data.first)
-				{
-					data.stack->n = atoi(tmpOpcode[NEXT]);
-					ft_free(tmpOpcode, data.line);
-					data.ln++;
-					data.first = false;
-					continue;
-				}
-				push(&data.stack, atoi(tmpOpcode[NEXT]));
-			}
+			if (prePush(&data, tmpOpcode))
+				continue;
 			if (tmpOpcode[BEGIN] && !ft_strcmp(tmpOpcode[BEGIN], PALL))
 				pall(data.stack);
 			data.ln++;

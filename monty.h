@@ -94,4 +94,5 @@ void    stackFree(stack_t *stack);
 bool    argChecker(char *str);
 stack_t	*ft_malloc(void);
 void	init(var_t *data);
+bool prePush(var_t *data, char **tmpOpcode);
 #endif /*MONTY_H*/
