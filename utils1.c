@@ -31,7 +31,7 @@ stack_t *ft_malloc(void)
 {
 	stack_t *stack;
 
-	stack = malloc(sizeof(stack));
+	stack = malloc(sizeof(stack) * 3);
 	if (!stack)
 	{
 		fprintf(stderr, MALLOCERR);
@@ -46,6 +46,7 @@ stack_t *ft_malloc(void)
  */
 void init(var_t *data)
 {
+	data->line = NULL;
 	data->ln = NEXT;
 	data->first = true;
 	data->stack = ft_malloc();
