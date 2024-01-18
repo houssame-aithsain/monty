@@ -73,11 +73,11 @@ void saveFileInput(int fd)
 			tmpOpcode = ft_split(line, SPACE);
 			tmpOpcode[BEGIN] = newLineEraser(tmpOpcode[BEGIN]);
 			if (ft_strcmp(tmpOpcode[BEGIN], PUSH) && ft_strcmp(tmpOpcode[BEGIN], PALL))
-				printError(tmpOpcode[BEGIN], line_number, DEFAULTERR);
+				printError(tmpOpcode, line, line_number, stack, DEFAULTERR);
 			if (tmpOpcode[BEGIN] && !ft_strcmp(tmpOpcode[BEGIN], PUSH))
 			{
 				if (!argChecker(tmpOpcode[NEXT]))
-					printError(tmpOpcode[BEGIN], line_number, PUSHERR);
+					printError(tmpOpcode, line, line_number, stack, PUSHERR);
 				if (line_number == NEXT)
 				{
 					stack->n = atoi(tmpOpcode[NEXT]);

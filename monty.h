@@ -68,7 +68,8 @@ char    **ft_split(char const *s, char c);
 char    *ft_strdup(char *s);
 int     ft_strcmp(const char *s1, const char *s2);
 void    ft_free(char **src, char *line);
-void    printError(char *opcode, int line, int flag);
+void    printError(char **opcode, char *line, int line_number,
+	stack_t *stack, int flag);
 void    pall(stack_t *stack);
 char    *newLineEraser(char *src);
 void    stackFree(stack_t *stack);
