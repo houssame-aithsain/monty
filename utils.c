@@ -58,6 +58,9 @@ void printError(char **opc, var_t *data, int flag)
 		case POPERR:
 			fprintf(stderr, "L%d: can't pop an empty stack\n", data->ln);
 			break;
+		case SWAPERR:
+			fprintf(stderr, "L%d: can't swap, stack too short\n", data->ln);
+			break;
 		default:
 			break;
 	}

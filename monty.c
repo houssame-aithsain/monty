@@ -100,7 +100,8 @@ void saveFileInput(int fd)
 			opcode = ft_split(data.line, SPACE);
 			opcode[BEGIN] = newLineEraser(opcode[BEGIN]);
 			if (ft_strcmp(opcode[BEGIN], PUSH) && ft_strcmp(opcode[BEGIN], PALL)
-				&& ft_strcmp(opcode[BEGIN], PINT) && ft_strcmp(opcode[BEGIN], POP))
+				&& ft_strcmp(opcode[BEGIN], PINT) && ft_strcmp(opcode[BEGIN], POP)
+				&& ft_strcmp(opcode[BEGIN], SWAP))
 				printError(opcode, &data, DEFAULTERR);
 			if (prePush(&data, opcode))
 				continue;
@@ -110,6 +111,8 @@ void saveFileInput(int fd)
 				pint(opcode, &data);
 			if (opcode[BEGIN] && !ft_strcmp(opcode[BEGIN], POP))
 				pop(opcode, &data);
+			if (opcode[BEGIN] && !ft_strcmp(opcode[BEGIN], SWAP))
+				swap(opcode, &data);
 			data.ln++;
 			ft_free(opcode, data.line);
 			continue;

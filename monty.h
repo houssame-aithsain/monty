@@ -13,6 +13,7 @@
 #define PALL "pall"
 #define PINT "pint"
 #define POP "pop"
+#define SWAP "swap"
 #define MALLOCERR "Error: malloc failed\n"
 #define BG -8462315
 
@@ -24,6 +25,7 @@
 #define PALLERR 32
 #define	PINTERR 34
 #define POPERR 36
+#define SWAPERR 38
 #define DEFAULTERR 0
 #define NEWLINE '\n'
 
@@ -100,4 +102,5 @@ void	init(var_t *data);
 bool	prePush(var_t *data, char **tmpOpcode);
 void	pint(char **opcode, var_t *data);
 void	pop(char **opcode, var_t *data);
+void	swap(char **opcode, var_t *data);
 #endif /*MONTY_H*/
