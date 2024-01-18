@@ -13,8 +13,20 @@ void pop(char **opcode, var_t *data)
 		printError(opcode, data, POPERR);
 	while (tmp->next)
 		tmp = tmp->next;
-	tmp->prev->next = NULL;
-	free(tmp);
+	while (data->stack->next)
+	{
+		if (data->stack->next == tmp)
+		{
+			data->stack->next = NULL;
+			free(tmp);
+			break;
+		}
+		data->stack = data->stack->next;
+	}
+	if (data->stack == tmp)
+		data->stack->n = BG;
+	while (data->stack->prev)
+		data->stack = data->stack->prev;
 }
 
 /**
