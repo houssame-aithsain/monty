@@ -12,6 +12,8 @@ bool argChecker(char *str)
 	str = newLineEraser(str);
 	if (!str)
 		return (false);
+	if (str[i] == '-' || str[i] == '+')
+		i++;
 	while (str[i])
 	{
 		if (str[i] < '0' || str[i] > '9')
