@@ -75,4 +75,5 @@ void    pall(stack_t *stack);
 char    *newLineEraser(char *src);
 void    stackFree(stack_t *stack);
 bool    argChecker(char *str);
+stack_t	*ft_malloc(void);
 #endif /*MONTY_H*/

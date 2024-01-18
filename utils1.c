@@ -22,3 +22,20 @@ bool argChecker(char *str)
 	}
 	return (true);
 }
+
+/**
+ * ft_malloc - Check if a string is a valid argument for push.
+ * Return: true if valid, false otherwise.
+ */
+stack_t *ft_malloc(void)
+{
+	stack_t *stack;
+
+	stack = malloc(sizeof(stack));
+	if (!stack)
+	{
+		fprintf(stderr, MALLOCERR);
+		exit(EXIT_FAILURE);
+	}
+	return (stack);
+}

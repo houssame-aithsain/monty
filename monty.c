@@ -23,13 +23,7 @@ void pall(stack_t *stack)
 void push(stack_t **stack, unsigned int numb)
 {
 	stack_t *tmp = *stack;
-	stack_t *node = malloc(sizeof(stack_t));
-
-	if (!node)
-	{
-		fprintf(stderr, MALLOCERR);
-		exit(EXIT_FAILURE);
-	}
+	stack_t *node = ft_malloc();
 
 	node->n = numb;
 	while (tmp->next)
@@ -68,7 +62,7 @@ void saveFileInput(int fd)
 	int line_number = NEXT;
 	stack_t *stack;
 
-	stack = malloc(sizeof(stack_t));
+	stack = ft_malloc();
 	stack->prev = NULL;
 	stack->next = NULL;
 	while (true)
