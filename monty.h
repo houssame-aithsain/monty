@@ -15,6 +15,7 @@
 #define POP "pop"
 #define SWAP "swap"
 #define ADD "add"
+#define NOP "nop"
 #define MALLOCERR "Error: malloc failed\n"
 #define BG -8462315
 

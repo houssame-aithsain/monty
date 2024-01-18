@@ -101,7 +101,8 @@ void saveFileInput(int fd)
 			opcode[BEGIN] = newLineEraser(opcode[BEGIN]);
 			if (ft_strcmp(opcode[BEGIN], PUSH) && ft_strcmp(opcode[BEGIN], PALL)
 				&& ft_strcmp(opcode[BEGIN], PINT) && ft_strcmp(opcode[BEGIN], POP)
-				&& ft_strcmp(opcode[BEGIN], SWAP) && ft_strcmp(opcode[BEGIN], ADD))
+				&& ft_strcmp(opcode[BEGIN], SWAP) && ft_strcmp(opcode[BEGIN], ADD)
+				&& ft_strcmp(opcode[BEGIN], NOP))
 				printError(opcode, &data, DEFAULTERR);
 			if (prePush(&data, opcode))
 				continue;
