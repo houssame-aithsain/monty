@@ -10,7 +10,7 @@ bool argChecker(char *str)
 	int i = 0;
 
 	str = newLineEraser(str);
-	if (!str)
+	if (!str || !str[BEGIN])
 		return (false);
 	if (str[i] == '-' || str[i] == '+')
 		i++;
