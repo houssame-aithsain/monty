@@ -7,11 +7,18 @@
  */
 bool argChecker(char *str)
 {
+	int i = 0;
+
+	str = newLineEraser(str);
 	if (!str)
 		return (false);
-
-	if (str[BEGIN] && is_op(str[BEGIN]) && str[NEXT] >= '0' && str[NEXT] <= '9')
-		return (true);
-
-	return (str[BEGIN] >= '0' && str[BEGIN] <= '9');
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	while (str[i])
+	{
+		if (str[i] < '0' || str[i] > '9')
+			return (false);
+		i++;
+	}
+	return (true);
 }
