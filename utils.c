@@ -61,6 +61,9 @@ void printError(char **opc, var_t *data, int flag)
 		case SWAPERR:
 			fprintf(stderr, "L%d: can't swap, stack too short\n", data->ln);
 			break;
+		case ADDERR:
+			fprintf(stderr, "L%d: can't add, stack too short\n", data->ln);
+			break;
 		default:
 			break;
 	}

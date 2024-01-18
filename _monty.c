@@ -1,6 +1,39 @@
 #include "monty.h"
 
 /**
+ * add - Adds the top two elements of the stack.
+ * @opcode: An array containing the opcode (not used in the function).
+ * @data: A pointer to the structure holding program data.
+ */
+void add(char **opcode, var_t *data)
+{
+	stack_t *tmp = data->stack;
+	int count = NEXT;
+
+	while (tmp->next)
+	{
+		count++;
+		tmp = tmp->next;
+	}
+	if (!data->stack || data->stack->n == BG || count < 2)
+		printError(opcode, data, ADDERR);
+	count = tmp->n;
+	while (data->stack->next)
+	{
+		if (data->stack->next == tmp)
+		{
+			data->stack->next = NULL;
+			free(tmp);
+			break;
+		}
+		data->stack = data->stack->next;
+	}
+	data->stack->n += count;
+	while (data->stack && data->stack->prev)
+		data->stack = data->stack->prev;
+}
+
+/**
  * swap - Swaps the top two elements of the stack.
  * @opcode: An array containing the opcode (not used in the function).
  * @data: A pointer to the structure holding program data.
