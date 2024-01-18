@@ -71,7 +71,7 @@ int     ft_strcmp(const char *s1, const char *s2);
 void    ft_free(char **src, char *line);
 void    printError(char **opcode, char *line, int line_number,
 	stack_t *stack, int flag);
-void    pall(stack_t *stack);
+void	pall(stack_t *stack, int line_number);
 char    *newLineEraser(char *src);
 void    stackFree(stack_t *stack);
 bool    argChecker(char *str);

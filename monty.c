@@ -3,9 +3,12 @@
 /**
  * pall - Print all elements of the stack.
  * @stack: Pointer to the top of the stack.
+ * @line_number: line_number
  */
-void pall(stack_t *stack)
+void pall(stack_t *stack, int line_number)
 {
+	if (!stack || line_number == NEXT)
+		return;
 	while (stack->next)
 		stack = stack->next;
 	while (stack)
@@ -88,7 +91,7 @@ void saveFileInput(int fd)
 				push(&stack, atoi(tmpOpcode[NEXT]));
 			}
 			if (tmpOpcode[BEGIN] && !ft_strcmp(tmpOpcode[BEGIN], PALL))
-				pall(stack);
+				pall(stack, line_number);
 			line_number++;
 			ft_free(tmpOpcode, line);
 			continue;
