@@ -47,7 +47,7 @@ int getFileDescriptorId(char *fileName)
 
 	if (!is_valide_fd(fd))
 	{
-		fprintf(stderr, "%s %s", FDERR, fileName);
+		fprintf(stderr, "%s %s\n", FDERR, fileName);
 		exit(EXIT_FAILURE);
 	}
 	return (fd);
