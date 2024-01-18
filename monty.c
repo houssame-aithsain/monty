@@ -1,6 +1,23 @@
 #include "monty.h"
 
 /**
+ * pop - Removes the top element from the stack.
+ * @opcode: An array containing the opcode (not used in the function).
+ * @data: A pointer to the structure holding program data.
+ */
+void pop(char **opcode, var_t *data)
+{
+	stack_t *tmp = data->stack;
+
+	if (!tmp || tmp->n == BG)
+		printError(opcode, data, POPERR);
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->prev->next = NULL;
+	free(tmp);
+}
+
+/**
  * pint - Prints the value at the top of the stack.
  * @opcode: An array containing the opcode (not used in the function).
  * @data: A pointer to the structure holding program data.
@@ -68,7 +85,7 @@ void saveFileInput(int fd)
 			opcode = ft_split(data.line, SPACE);
 			opcode[BEGIN] = newLineEraser(opcode[BEGIN]);
 			if (ft_strcmp(opcode[BEGIN], PUSH) && ft_strcmp(opcode[BEGIN], PALL)
-				&& ft_strcmp(opcode[BEGIN], PINT))
+				&& ft_strcmp(opcode[BEGIN], PINT) && ft_strcmp(opcode[BEGIN], POP))
 				printError(opcode, &data, DEFAULTERR);
 			if (prePush(&data, opcode))
 				continue;
@@ -76,6 +93,8 @@ void saveFileInput(int fd)
 				pall(data.stack);
 			if (opcode[BEGIN] && !ft_strcmp(opcode[BEGIN], PINT))
 				pint(opcode, &data);
+			if (opcode[BEGIN] && !ft_strcmp(opcode[BEGIN], POP))
+				pop(opcode, &data);
 			data.ln++;
 			ft_free(opcode, data.line);
 			continue;

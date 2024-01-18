@@ -12,8 +12,8 @@
 #define PUSH "push"
 #define PALL "pall"
 #define PINT "pint"
+#define POP "pop"
 #define MALLOCERR "Error: malloc failed\n"
-#define EMPTYLINE ": can't pint, stack empty\n"
 #define BG -8462315
 
 #define ARGV_NUMB 2
@@ -23,6 +23,7 @@
 #define PUSHERR 31
 #define PALLERR 32
 #define	PINTERR 34
+#define POPERR 36
 #define DEFAULTERR 0
 #define NEWLINE '\n'
 
@@ -98,4 +99,5 @@ stack_t	*ft_malloc(void);
 void	init(var_t *data);
 bool	prePush(var_t *data, char **tmpOpcode);
 void	pint(char **opcode, var_t *data);
+void	pop(char **opcode, var_t *data);
 #endif /*MONTY_H*/

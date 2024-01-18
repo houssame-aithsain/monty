@@ -55,6 +55,9 @@ void printError(char **opc, var_t *data, int flag)
 		case PINTERR:
 			fprintf(stderr, "L%d: can't pint, stack empty\n", data->ln);
 			break;
+		case POPERR:
+			fprintf(stderr, "L%d: can't pop an empty stack\n", data->ln);
+			break;
 		default:
 			break;
 	}
